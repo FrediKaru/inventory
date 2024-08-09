@@ -1,0 +1,26 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+.action-btn > * {
+  padding: 6px 30px;
+  background-color: rgb(168, 168, 216);
+  margin: 4px;
+}
+
+tr:nth-child(even) {
+  background-color: rgb(215, 233, 255);
+}
+
+.component-label {
+  padding: 30px 0;
+}
+
+.sidebar {
+  background-color: rgb(153, 165, 255);
+  padding: 0px 20px 10px 25px;
+}
+
+.edit-form > input {
+  border: 1px solid red;
+}
