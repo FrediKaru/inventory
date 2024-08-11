@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { getProducts } from "../inventoryItems";
 
 interface InventoryItemProps {
   name: string;
@@ -9,6 +10,20 @@ interface InventoryItemProps {
 }
 
 export default function Inventory() {
+  const [inventory, setInventory] = useState([]);
+
+  useEffect(() => {
+    const fetchInventory = async () => {
+      try {
+        const inventoryItems = await getProducts();
+        setInventory(inventoryItems);
+      } catch (e) {
+        console.log("Fetching products is not possible!");
+      }
+    };
+    fetchInventory();
+  }, []);
+
   return (
     <div className="w-full">
       <div className="flex justify-between ">
@@ -25,7 +40,11 @@ export default function Inventory() {
           </tr>
         </thead>
         <tbody>
-          <InventoryItem
+          {inventory.map((item) => (
+            <InventoryItem id={item.id} name={item.name} status={"3"} />
+          ))}
+
+          {/* <InventoryItem
             id={878}
             name="Robe T2 Profile FS"
             status="2"
@@ -35,7 +54,7 @@ export default function Inventory() {
           <InventoryItem id={832} name="Robe Robospot" status="2" />
           <InventoryItem id={112} name="ETC series 3" status="2" />
           <InventoryItem id={122} name="ETC series 2" status="10" />
-          <InventoryItem id={131} name="Luxibel Blinder" status="13" />
+          <InventoryItem id={131} name="Luxibel Blinder" status="13" /> */}
         </tbody>
       </table>
     </div>

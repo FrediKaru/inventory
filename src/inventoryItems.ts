@@ -18,6 +18,15 @@ const analytics = getAnalytics(app);
 const db = getFirestore();
 const productsRef = collection(db, "products");
 
+export async function getProducts() {
+  const querySnapshot = await getDocs(collection(db, "products"));
+  const products = [];
+  querySnapshot.forEach((doc) => {
+    products.push(doc.data());
+  });
+  return products;
+}
+
 export async function getProduct(id: number) {
   const docRef = doc(db, "products", id.toString());
   const docSnap = await getDoc(docRef);
