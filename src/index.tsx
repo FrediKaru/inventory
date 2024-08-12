@@ -20,6 +20,22 @@ const router = createBrowserRouter([
         element: <Inventory />,
       },
       {
+        path: "/dashboard",
+        element: <Inventory />,
+      },
+      {
+        path: "/inventory",
+        element: <Inventory />,
+      },
+      {
+        path: "/reservations",
+        element: <Inventory />,
+      },
+      {
+        path: "/preferences",
+        element: <Inventory />,
+      },
+      {
         path: "/edit/:id",
         element: <Edit />,
       },

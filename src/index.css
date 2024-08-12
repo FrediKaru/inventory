@@ -2,14 +2,20 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-.action-btn > * {
-  padding: 6px 30px;
-  background-color: rgb(168, 168, 216);
-  margin: 4px;
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: #122d32;
 }
 
-tr:nth-child(even) {
-  background-color: rgb(215, 233, 255);
+.action-btn > * {
+  padding: 5px 20px;
+  margin: 3px;
+  border: 1px solid rgb(212, 212, 212);
+  border-radius: 4pt;
+  font-size: 11pt;
+  box-shadow: 0 2px 2px 0 rgba(146, 146, 146, 0.2);
 }
 
 .component-label {
@@ -17,10 +23,110 @@ tr:nth-child(even) {
 }
 
 .sidebar {
-  background-color: rgb(153, 165, 255);
+  background-color: #001d22;
+  color: #c7cdcd;
   padding: 0px 20px 10px 25px;
 }
 
 .edit-form > input {
   border: 1px solid red;
+}
+.result {
+  border-bottom: 1px solid rgb(240, 240, 240);
+}
+
+tr > * {
+  padding: 8px 0;
+}
+.inventory-header,
+.result {
+  text-align: left;
+}
+
+input[type="checkbox"] {
+  margin-left: 12px;
+}
+
+.sidebar-button {
+  padding: 7px 10px;
+  border-radius: 5px;
+  font-size: 11pt;
+  font-weight: 300;
+}
+.active-button {
+  background-color: #26433c;
+  box-shadow: 0 -1px 1px 0 rgb(85, 105, 96);
+  color: rgb(255, 255, 255);
+}
+
+.roboto-thin {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.roboto-light {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.roboto-regular {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.roboto-medium {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.roboto-bold {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.roboto-black {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.roboto-thin-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.roboto-light-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.roboto-regular-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.roboto-medium-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.roboto-bold-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.roboto-black-italic {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-style: italic;
 }
