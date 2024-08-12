@@ -1,5 +1,5 @@
 import React, { Suspense, useEffect, useState } from "react";
-import { Form, useParams } from "react-router-dom";
+import { Form, useNavigate, useParams } from "react-router-dom";
 import { getProduct, saveProduct, setSampleProducts } from "../inventoryItems";
 import Loading from "../components/Loading";
 
@@ -7,6 +7,7 @@ export default function Edit() {
   const [formData, setFormData] = useState("");
   const [contentLoaded, setContentLoaded] = useState(false);
   const { id } = useParams();
+  const navigate = useNavigate();
 
   //import product data from ID included in URL
   useEffect(() => {
@@ -24,6 +25,7 @@ export default function Edit() {
 
   async function handleSave() {
     await saveProduct(id, formData);
+    navigate("/");
   }
 
   const handleFieldChange = (e) => {
