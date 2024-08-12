@@ -84,6 +84,13 @@ export default function Edit() {
               value={formData.type}
               onChange={handleFieldChange}
             />
+            <label>Quantity</label>
+            <input
+              type="text"
+              name="quantity"
+              value={formData.quantity}
+              onChange={handleFieldChange}
+            />
             <label>Weight</label>
             <input
               type="text"
@@ -96,6 +103,9 @@ export default function Edit() {
         <input type="text" name="amount" value={formData.amount} /> */}
 
             <button type="submit">Save</button>
+            <button type="button" onClick={() => navigate("/")}>
+              Cancel
+            </button>
           </Form>
         </>
       ) : (
