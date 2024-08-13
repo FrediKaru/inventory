@@ -3,14 +3,19 @@ import { Link } from "react-router-dom";
 import { getProducts } from "../inventoryItems";
 
 interface InventoryItemProps {
-  name: string;
   id: number;
-  status: string;
+  name: string;
+  cost: number;
+  type: string;
+  powerConsumption: number;
+  manufacturer: string;
+  weight: number;
+  quantity?: number;
   lastModified?: number;
 }
 
 export default function Inventory() {
-  const [inventory, setInventory] = useState([]);
+  const [inventory, setInventory] = useState<InventoryItemProps[]>([]);
 
   useEffect(() => {
     const fetchInventory = async () => {
@@ -31,45 +36,41 @@ export default function Inventory() {
         <input type="text" placeholder="Search.." />
       </div>
       <table className="w-full">
-        <thead>
-          <tr className="inventory-header ">
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Status</th>
-            <th scope="col">Actions</th>
+        <thead className="bg-lightPrimary">
+          <tr className="inventory-header">
+            <td scope="col">
+              {" "}
+              <input type="checkbox"></input>
+            </td>
+            <td scope="col">Product ID</td>
+            <td scope="col">Name</td>
+            <td scope="col">Category</td>
+            <td scope="col">Quantity</td>
+            <td scope="col">Actions</td>
           </tr>
         </thead>
         <tbody>
           {inventory.map((item) => (
-            <InventoryItem id={item.id} name={item.name} status={"3"} />
+            <InventoryItem key={item.id} item={item} />
           ))}
-
-          {/* <InventoryItem
-            id={878}
-            name="Robe T2 Profile FS"
-            status="2"
-            lastModified={Date.now()}
-          />
-          <InventoryItem id={831} name="Robe T2 Profile" status="2" />
-          <InventoryItem id={832} name="Robe Robospot" status="2" />
-          <InventoryItem id={112} name="ETC series 3" status="2" />
-          <InventoryItem id={122} name="ETC series 2" status="10" />
-          <InventoryItem id={131} name="Luxibel Blinder" status="13" /> */}
         </tbody>
       </table>
     </div>
   );
 }
 
-function InventoryItem({ id, name, status, lastModified }: InventoryItemProps) {
+function InventoryItem({ item }: { item: InventoryItemProps }) {
   return (
     <tr className="result">
-      <th scope="row">{id}</th>
-      <td>{name}</td>
-      <td>{status}</td>
-      <td>{lastModified}</td>
+      <td>
+        <input type="checkbox"></input>
+      </td>
+      <td scope="row">#{item.id}</td>
+      <td>{item.name}</td>
+      <td>{item.type}</td>
+      <td>{item.quantity}</td>
       <td className="flex action-btn">
-        <Link to={`/edit/${id}`}>Edit</Link>
+        <Link to={`/edit/${item.id}`}>Edit</Link>
         <button>Delete</button>
       </td>
     </tr>
