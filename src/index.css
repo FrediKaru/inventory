@@ -4,22 +4,43 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 
+:root {
+  --border-color: rgb(181, 188, 181);
+}
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: "Roboto", sans-serif;
   color: #122d32;
 }
 
-.action-btn > * {
+.empty-btn,
+.btn {
   padding: 5px 20px;
-  margin: 3px;
+  font-size: 11pt;
+}
+
+.btn {
   border: 1px solid rgb(212, 212, 212);
   border-radius: 4pt;
-  font-size: 11pt;
   box-shadow: 0 2px 2px 0 rgba(146, 146, 146, 0.2);
+  background-color: white;
 }
 
 .component-label {
   padding: 30px 0;
+  border: 1px solid red;
+}
+.inventory-list {
+  font-size: 11pt;
 }
 
 .sidebar {
@@ -28,9 +49,6 @@ body {
   padding: 0px 20px 10px 25px;
 }
 
-.edit-form > input {
-  border: 1px solid red;
-}
 .result {
   border-bottom: 1px solid rgb(240, 240, 240);
 }
@@ -41,6 +59,32 @@ tr > * {
 .inventory-header,
 .result {
   text-align: left;
+}
+.content-area {
+  background-color: white;
+}
+.content-padding {
+  padding: 20px;
+}
+.border-top-bottom {
+  border-bottom: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-color);
+}
+.border-bottom-only {
+  border-bottom: 1px solid var(--border-color);
+}
+
+.edit-field input {
+  font-size: 11pt;
+  padding: 4px;
+  border: 1px solid rgb(211, 211, 211);
+  border-radius: 3px;
+}
+.edit-field label {
+  display: block;
+  font-size: 11pt;
+  font-weight: 400;
+  margin-bottom: 0.3rem;
 }
 
 input[type="checkbox"] {

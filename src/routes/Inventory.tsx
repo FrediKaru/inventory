@@ -14,8 +14,21 @@ interface InventoryItemProps {
   lastModified?: number;
 }
 
+enum InventoryFilter {
+  All = "all",
+  Available = "available",
+  Unavailable = "unavailable",
+}
+
 export default function Inventory() {
   const [inventory, setInventory] = useState<InventoryItemProps[]>([]);
+  const [filter, setFilter] = useState<InventoryFilter>(InventoryFilter.All);
+
+  function handleFilterChange(e: React.MouseEvent<HTMLButtonElement>) {
+    const newState = e.currentTarget.value as keyof typeof InventoryFilter;
+
+    setFilter(newState);
+  }
 
   useEffect(() => {
     const fetchInventory = async () => {
@@ -30,31 +43,69 @@ export default function Inventory() {
   }, []);
 
   return (
-    <div className="w-full">
-      <div className="flex justify-between ">
-        <h2 className="component-label">Inventory</h2>
+    <div className="w-full content-area">
+      <div className="flex justify-between content-padding bg-lightPrimary border-top-bottom">
+        <h2 className="">Inventory</h2>
         <input type="text" placeholder="Search.." />
       </div>
-      <table className="w-full">
-        <thead className="bg-lightPrimary">
-          <tr className="inventory-header">
-            <td scope="col">
-              {" "}
-              <input type="checkbox"></input>
-            </td>
-            <td scope="col">Product ID</td>
-            <td scope="col">Name</td>
-            <td scope="col">Category</td>
-            <td scope="col">Quantity</td>
-            <td scope="col">Actions</td>
-          </tr>
-        </thead>
-        <tbody>
-          {inventory.map((item) => (
-            <InventoryItem key={item.id} item={item} />
-          ))}
-        </tbody>
-      </table>
+
+      <div className="content-padding">
+        <div className="mb-3">
+          <button
+            className={
+              filter === InventoryFilter.All
+                ? "btn"
+                : "empty-btn bg-lightPrimary"
+            }
+            onClick={handleFilterChange}
+            value="all"
+          >
+            All products
+          </button>
+          <button
+            className={
+              filter === InventoryFilter.Available
+                ? "btn"
+                : "empty-btn bg-lightPrimary"
+            }
+            onClick={handleFilterChange}
+            value="available"
+          >
+            Available
+          </button>
+          <button
+            className={
+              filter === InventoryFilter.Unavailable
+                ? "btn"
+                : "empty-btn bg-lightPrimary"
+            }
+            onClick={handleFilterChange}
+            value="unavailable"
+          >
+            Reserved
+          </button>
+        </div>
+        <table className="w-full inventory-list ">
+          <thead className="bg-lightPrimary">
+            <tr className="inventory-header">
+              <td scope="col">
+                {" "}
+                <input type="checkbox"></input>
+              </td>
+              <td scope="col">Product ID</td>
+              <td scope="col">Name</td>
+              <td scope="col">Category</td>
+              <td scope="col">Quantity</td>
+              <td scope="col">Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+            {inventory.map((item) => (
+              <InventoryItem key={item.id} item={item} />
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }
@@ -69,9 +120,11 @@ function InventoryItem({ item }: { item: InventoryItemProps }) {
       <td>{item.name}</td>
       <td>{item.type}</td>
       <td>{item.quantity}</td>
-      <td className="flex action-btn">
-        <Link to={`/edit/${item.id}`}>Edit</Link>
-        <button>Delete</button>
+      <td className="flex btn-group">
+        <Link to={`/edit/${item.id}`} className="btn">
+          Edit
+        </Link>
+        <button className="btn">Delete</button>
       </td>
     </tr>
   );

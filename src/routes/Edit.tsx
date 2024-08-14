@@ -38,66 +38,81 @@ export default function Edit() {
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-lightPrimary w-full ">
       {contentLoaded ? (
-        <>
-          <h2>Edit item</h2>
+        <div className="content-padding">
+          <h2 className="text-2xl font-medium mb-8">Edit item</h2>
           <Form
             method="post"
             action="/"
             className="edit-form flex flex-col"
             onSubmit={handleSave}
           >
-            <label>ID</label>
-            <input
-              type="text"
-              name="id"
-              value={id}
-              onChange={handleFieldChange}
-            />
+            <div className="edit-field">
+              <label>ID</label>
+              <input
+                type="text"
+                name="id"
+                value={id}
+                onChange={handleFieldChange}
+              />
+            </div>
 
-            <label>Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleFieldChange}
-            />
-            <label>Power consumption</label>
-            <input
-              type="text"
-              name="powerConsumption"
-              value={formData.powerConsumption}
-              onChange={handleFieldChange}
-            />
-            <label>Cost</label>
-            <input
-              type="text"
-              name="cost"
-              value={formData.cost}
-              onChange={handleFieldChange}
-            />
-            <label>Type</label>
-            <input
-              type="text"
-              name="type"
-              value={formData.type}
-              onChange={handleFieldChange}
-            />
-            <label>Quantity</label>
-            <input
-              type="text"
-              name="quantity"
-              value={formData.quantity}
-              onChange={handleFieldChange}
-            />
-            <label>Weight</label>
-            <input
-              type="text"
-              name="weight"
-              value={formData.weight}
-              onChange={handleFieldChange}
-            />
+            <div className="edit-field">
+              <label>Name</label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleFieldChange}
+              />
+            </div>
+
+            <div className="edit-field">
+              <label>Cost</label>
+              <input
+                type="text"
+                name="cost"
+                value={formData.cost}
+                onChange={handleFieldChange}
+              />
+            </div>
+            <div className="edit-field">
+              <label>Type</label>
+              <input
+                type="text"
+                name="type"
+                value={formData.type}
+                onChange={handleFieldChange}
+              />
+            </div>
+            <div className="edit-field">
+              <label>Power consumption</label>
+              <input
+                type="text"
+                name="powerConsumption"
+                value={formData.powerConsumption}
+                onChange={handleFieldChange}
+              />
+            </div>
+            <div className="edit-field">
+              <label>Weight</label>
+              <input
+                type="text"
+                name="weight"
+                value={formData.weight}
+                onChange={handleFieldChange}
+              />
+            </div>
+            <div className="edit-field">
+              <label>Quantity</label>
+              <input
+                type="text"
+                name="quantity"
+                value={formData.quantity}
+                onChange={handleFieldChange}
+              />
+            </div>
 
             {/* <label>Amount</label>
         <input type="text" name="amount" value={formData.amount} /> */}
@@ -107,7 +122,7 @@ export default function Edit() {
               Cancel
             </button>
           </Form>
-        </>
+        </div>
       ) : (
         <Loading />
       )}
