@@ -124,7 +124,9 @@ export default function Edit() {
           </Form>
         </div>
       ) : (
-        <Loading />
+        <div className="flex min-h-full">
+          <Loading />
+        </div>
       )}
     </div>
   );
