@@ -10,7 +10,9 @@ import {
   getDoc,
   collection,
   getFirestore,
+  DocumentData,
 } from "firebase/firestore";
+import { InventoryItemProps } from "./routes/Inventory";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -20,29 +22,52 @@ const productsRef = collection(db, "products");
 
 export async function getProducts() {
   const querySnapshot = await getDocs(collection(db, "products"));
-  const products = [];
+  const products: InventoryItemProps[] = [];
   querySnapshot.forEach((doc) => {
-    products.push(doc.data());
+    products.push(transformData(doc.data()));
   });
   return products;
 }
+const transformData = (data: DocumentData): InventoryItemProps => {
+  return {
+    id: Number(data.id),
+    name: data.name || "",
+    manufacturer: data.manufacturer || "",
+    cost: Number(data.cost) || 0,
+    type: data.type || "",
+    powerConsumption: Number(data.powerConsumption) || 0,
+    weight: Number(data.weight),
+    quantity: Number(data.quantity),
+  };
+};
 
 export async function getProduct(id: number) {
   const docRef = doc(db, "products", id.toString());
   const docSnap = await getDoc(docRef);
 
   if (docSnap.exists()) {
-    console.log("Product data:", docSnap.data());
-    return docSnap.data();
+    const data = docSnap.data() as DocumentData;
+    return transformData(data);
   } else {
     console.log("No such product!");
     return null;
   }
 }
+const transformForFirestore = (data: InventoryItemProps): DocumentData => {
+  return {
+    id: data.id,
+    name: data.name,
+    cost: data.cost,
+    type: data.type,
+    powerConsumption: data.powerConsumption,
+    weight: data.weight,
+    quantity: data.quantity,
+  };
+};
 
-export async function saveProduct(id, formData) {
+export async function saveProduct(id: number, formData: InventoryItemProps) {
   try {
-    await setDoc(doc(productsRef, id), {
+    await setDoc(doc(productsRef, id.toString()), {
       ...formData,
     });
     console.log("Product saved successfully");

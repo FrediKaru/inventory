@@ -5,11 +5,11 @@ import { getProducts } from "../inventoryItems";
 import { FaUser } from "react-icons/fa";
 import { MdCategory } from "react-icons/md";
 
-interface InventoryItemProps {
+export interface InventoryItemProps {
   id: number;
   name: string;
   cost: number;
-  type: string;
+  type?: string;
   powerConsumption: number;
   manufacturer: string;
   weight: number;
