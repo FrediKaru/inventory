@@ -30,7 +30,7 @@ export default function Inventory() {
   function handleFilterChange(e: React.MouseEvent<HTMLButtonElement>) {
     const newState = e.currentTarget.value as keyof typeof InventoryFilter;
 
-    setFilter(newState);
+    setFilter(InventoryFilter[newState]);
   }
 
   useEffect(() => {
@@ -104,6 +104,9 @@ export default function Inventory() {
                 </div>
               </td>
               <td scope="col">
+                <div className="list-heading">Status</div>
+              </td>
+              <td scope="col">
                 <div>Quantity</div>
               </td>
               <td scope="col" className="list-heading">
@@ -134,8 +137,19 @@ function InventoryItem({ item }: { item: InventoryItemProps }) {
       <td scope="row">#{item.id}</td>
       <td>{item.name}</td>
       <td>{item.type}</td>
+      <td>
+        {typeof item.quantity === "number" && item.quantity > 0 ? (
+          <>
+            <div className="circle green"></div> Available
+          </>
+        ) : (
+          <>
+            <div className="circle red"></div> Unavailable
+          </>
+        )}{" "}
+      </td>
       <td>{item.quantity}</td>
-      <td className="flex btn-group">
+      <td className="flex btn-group gap-2">
         <Link to={`/edit/${item.id}`} className="btn">
           Edit
         </Link>
