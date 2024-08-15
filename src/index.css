@@ -45,15 +45,38 @@ body {
 .inventory-list {
   font-size: 11pt;
 }
+.loader-spinner {
+  animation: spinner 1s infinite linear;
+}
+
+@keyframes spinner {
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 .sidebar {
   background-color: #001d22;
   color: #c7cdcd;
   padding: 0px 20px 10px 25px;
+  min-height: 100svh;
 }
 
 .result {
   border-bottom: 1px solid rgb(240, 240, 240);
+}
+.circle {
+  background-color: #001d22;
+  width: 12px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  display: inline-block;
+}
+.green {
+  background-color: rgb(0, 153, 0);
+}
+.red {
+  background-color: rgb(153, 0, 0);
 }
 
 tr > * {
