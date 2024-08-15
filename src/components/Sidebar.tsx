@@ -2,13 +2,18 @@ import React from "react";
 
 import { NavLink, useLocation } from "react-router-dom";
 
+import { MdDashboard } from "react-icons/md";
+import { MdInventory } from "react-icons/md";
+import { FaBook } from "react-icons/fa";
+import { IoSettingsSharp } from "react-icons/io5";
+
 export default function Sidebar() {
   const location = useLocation();
 
   return (
-    <div className="sidebar bg-primary">
+    <div className="sidebar content-padding bg-primary">
       <div>
-        <h2 className="component-label">Lighttrack</h2>
+        <h2 className="mb-10">Lighttrack</h2>
         <ul
           className="flex
          flex-col gap-3"
@@ -20,7 +25,7 @@ export default function Sidebar() {
                 isActive ? "active-button sidebar-button" : "sidebar-button"
               }
             >
-              Dashboard
+              <MdDashboard className="mr-2" /> Dashboard
             </NavLink>
           </li>
           <li>
@@ -30,6 +35,7 @@ export default function Sidebar() {
                 isActive ? "active-button sidebar-button" : "sidebar-button"
               }
             >
+              <MdInventory className="mr-2" />
               Inventory
             </NavLink>
           </li>
@@ -40,6 +46,7 @@ export default function Sidebar() {
                 isActive ? "active-button sidebar-button" : "sidebar-button"
               }
             >
+              <FaBook className="mr-2" />
               Reservations
             </NavLink>
           </li>
@@ -50,6 +57,8 @@ export default function Sidebar() {
                 isActive ? "active-button sidebar-button" : "sidebar-button"
               }
             >
+              {" "}
+              <IoSettingsSharp className="mr-2" />
               Preferences
             </NavLink>
           </li>

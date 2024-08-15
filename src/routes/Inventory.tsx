@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getProducts } from "../inventoryItems";
 
+import { FaUser } from "react-icons/fa";
+import { MdCategory } from "react-icons/md";
+
 interface InventoryItemProps {
   id: number;
   name: string;
@@ -45,7 +48,7 @@ export default function Inventory() {
   return (
     <div className="w-full content-area">
       <div className="flex justify-between content-padding bg-lightPrimary border-top-bottom">
-        <h2 className="">Inventory</h2>
+        <h2 className="page-title">Inventory</h2>
         <input type="text" placeholder="Search.." />
       </div>
 
@@ -94,9 +97,21 @@ export default function Inventory() {
               </td>
               <td scope="col">Product ID</td>
               <td scope="col">Name</td>
-              <td scope="col">Category</td>
-              <td scope="col">Quantity</td>
-              <td scope="col">Actions</td>
+              <td scope="col">
+                <div className="list-heading">
+                  <MdCategory className="mr-2" />
+                  Category
+                </div>
+              </td>
+              <td scope="col">
+                <div>Quantity</div>
+              </td>
+              <td scope="col" className="list-heading">
+                <div className="list-heading">
+                  <FaUser className="mr-2" />
+                  Actions
+                </div>
+              </td>
             </tr>
           </thead>
           <tbody>
