@@ -52,17 +52,17 @@ export async function getProduct(id: number) {
     return null;
   }
 }
-const transformForFirestore = (data: InventoryItemProps): DocumentData => {
-  return {
-    id: data.id,
-    name: data.name,
-    cost: data.cost,
-    type: data.type,
-    powerConsumption: data.powerConsumption,
-    weight: data.weight,
-    quantity: data.quantity,
-  };
-};
+// const transformForFirestore = (data: InventoryItemProps): DocumentData => {
+//   return {
+//     id: data.id,
+//     name: data.name,
+//     cost: data.cost,
+//     type: data.type,
+//     powerConsumption: data.powerConsumption,
+//     weight: data.weight,
+//     quantity: data.quantity,
+//   };
+// };
 
 export async function saveProduct(id: number, formData: InventoryItemProps) {
   try {
