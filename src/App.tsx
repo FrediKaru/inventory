@@ -1,11 +1,11 @@
-interface InventoryItemProps {
-  id: number;
-  name: string;
-  status: string;
-  lastModified?: number;
-}
+// interface InventoryItemProps {
+//   id: number;
+//   name: string;
+//   status: string;
+//   lastModified?: number;
+// }
 
-import { NavLink, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 
 function App() {

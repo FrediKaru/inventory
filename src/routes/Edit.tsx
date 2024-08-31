@@ -1,6 +1,6 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, useNavigate, useParams } from "react-router-dom";
-import { getProduct, saveProduct, setSampleProducts } from "../inventoryItems";
+import { getProduct, saveProduct } from "../inventoryItems";
 import Loading from "../components/Loading";
 import { InventoryItemProps } from "./Inventory";
 
@@ -55,74 +55,82 @@ export default function Edit() {
             className="edit-form flex flex-col"
             onSubmit={handleSave}
           >
-            <div className="edit-field">
-              <label>ID</label>
-              <input type="text" name="id" readOnly value={id} />
-            </div>
-
-            <div className="edit-field">
-              <label>Name</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleFieldChange}
-              />
-            </div>
-
-            <div className="edit-field">
-              <label>Cost</label>
-              <input
-                type="text"
-                name="cost"
-                value={formData.cost}
-                onChange={handleFieldChange}
-              />
-            </div>
-            <div className="edit-field">
-              <label>Type</label>
-              <input
-                type="text"
-                name="type"
-                value={formData.type}
-                onChange={handleFieldChange}
-              />
-            </div>
-            <div className="edit-field">
-              <label>Power consumption</label>
-              <input
-                type="text"
-                name="powerConsumption"
-                value={formData.powerConsumption}
-                onChange={handleFieldChange}
-              />
-            </div>
-            <div className="edit-field">
-              <label>Weight</label>
-              <input
-                type="text"
-                name="weight"
-                value={formData.weight}
-                onChange={handleFieldChange}
-              />
-            </div>
-            <div className="edit-field">
-              <label>Quantity</label>
-              <input
-                type="text"
-                name="quantity"
-                value={formData.quantity}
-                onChange={handleFieldChange}
-              />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="edit-field">
+                <label>ID</label>
+                <input type="text" name="id" readOnly value={id} />
+              </div>
+              <div className="edit-field">
+                <label>Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleFieldChange}
+                />
+              </div>
+              <div className="edit-field">
+                <label>Cost</label>
+                <input
+                  type="text"
+                  name="cost"
+                  value={formData.cost}
+                  onChange={handleFieldChange}
+                />
+              </div>
+              <div className="edit-field">
+                <label>Type</label>
+                <input
+                  type="text"
+                  name="type"
+                  value={formData.type}
+                  onChange={handleFieldChange}
+                />
+              </div>
+              <div className="edit-field">
+                <label>Power consumption</label>
+                <input
+                  type="text"
+                  name="powerConsumption"
+                  value={formData.powerConsumption}
+                  onChange={handleFieldChange}
+                />
+              </div>
+              <div className="edit-field">
+                <label>Weight</label>
+                <input
+                  type="text"
+                  name="weight"
+                  value={formData.weight}
+                  onChange={handleFieldChange}
+                />
+              </div>
+              <div className="edit-field">
+                <label>Quantity</label>
+                <input
+                  type="text"
+                  name="quantity"
+                  value={formData.quantity}
+                  onChange={handleFieldChange}
+                />
+              </div>
             </div>
 
             {/* <label>Amount</label>
         <input type="text" name="amount" value={formData.amount} /> */}
 
-            <button type="submit">Save</button>
-            <button type="button" onClick={() => navigate("/")}>
-              Cancel
-            </button>
+            <div className="flex">
+              <button type="submit" className="btn">
+                Save
+              </button>
+              <button
+                type="button"
+                className="btn"
+                onClick={() => navigate("/")}
+              >
+                Cancel
+              </button>
+            </div>
           </Form>
         </div>
       ) : (

@@ -3,7 +3,6 @@ import { getAnalytics } from "firebase/analytics";
 import { firebaseConfig } from "./firebaseConfig";
 
 import {
-  addDoc,
   getDocs,
   setDoc,
   doc,

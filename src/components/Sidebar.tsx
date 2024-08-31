@@ -1,6 +1,4 @@
-import React from "react";
-
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import { MdDashboard } from "react-icons/md";
 import { MdInventory } from "react-icons/md";
@@ -8,8 +6,6 @@ import { FaBook } from "react-icons/fa";
 import { IoSettingsSharp } from "react-icons/io5";
 
 export default function Sidebar() {
-  const location = useLocation();
-
   return (
     <div className="sidebar content-padding bg-primary">
       <div>
