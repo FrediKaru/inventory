@@ -1,6 +1,6 @@
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { firebaseConfig } from "./firebaseConfig";
+// import { initializeApp } from "firebase/app";
+// import { getAnalytics } from "firebase/analytics";
+// import { firebaseConfig } from "./firebaseConfig";
 
 import {
   getDocs,
@@ -14,8 +14,8 @@ import {
 import { InventoryItemProps } from "./routes/Inventory";
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+// const app = initializeApp(firebaseConfig);
+// const analytics = getAnalytics(app);
 const db = getFirestore();
 const productsRef = collection(db, "products");
 
