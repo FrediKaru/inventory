@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+// @ts-ignore
 import { getAnalytics } from "firebase/analytics";
 import { firebaseConfig } from "./firebaseConfig";
 
