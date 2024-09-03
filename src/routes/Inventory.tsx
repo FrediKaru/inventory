@@ -129,9 +129,18 @@ export default function Inventory() {
             </tr>
           </thead>
           <tbody>
-            {inventory.map((item) => (
-              <InventoryItem key={item.id} item={item} />
-            ))}
+            {filter === InventoryFilter.All &&
+              inventory.map((item) => (
+                <InventoryItem key={item.id} item={item} />
+              ))}
+            {filter === InventoryFilter.Available &&
+              inventory
+                .filter((item) => item.quantity > 0)
+                .map((item) => <InventoryItem key={item.id} item={item} />)}
+            {filter === InventoryFilter.Unavailable &&
+              inventory
+                .filter((item) => !item.quantity)
+                .map((item) => <InventoryItem key={item.id} item={item} />)}
           </tbody>
         </table>
       </div>
