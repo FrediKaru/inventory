@@ -31,7 +31,7 @@ export default function Inventory() {
   const [searchInput, setSearchInput] = useState<String>("this");
 
   function searchInventory(searchInput: string) {
-    return filteredInventory.filter((item) =>
+    return inventory.filter((item) =>
       Object.values(item).some((value) =>
         value.toString().toLowerCase().includes(searchInput.toLowerCase())
       )
@@ -59,14 +59,15 @@ export default function Inventory() {
   useEffect(() => {
     setFilteredInventory(inventory);
   }, [inventory]);
+
   useEffect(() => {
     if (searchInput === "") {
-      setFilteredInventory(inventory);
+      setFilteredInventory(inventory); // Reset to full inventory when search is empty
     } else {
       const searchedItems = searchInventory(searchInput);
       setFilteredInventory(searchedItems);
     }
-  });
+  }, [searchInput, inventory]);
 
   useEffect(() => {
     const fetchInventory = async () => {
