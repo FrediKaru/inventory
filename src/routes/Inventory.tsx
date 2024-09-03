@@ -27,6 +27,22 @@ enum InventoryFilter {
 export default function Inventory() {
   const [inventory, setInventory] = useState<InventoryItemProps[]>([]);
   const [filter, setFilter] = useState<InventoryFilter>(InventoryFilter.All);
+  const [filteredInventory, setFilteredInventory] = useState(inventory);
+  const [searchInput, setSearchInput] = useState<String>("this");
+
+  function searchInventory(searchInput: string) {
+    return filteredInventory.filter((item) =>
+      Object.values(item).some((value) =>
+        value.toString().toLowerCase().includes(searchInput.toLowerCase())
+      )
+    );
+  }
+
+  function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>) {
+    e.preventDefault();
+    const value = e.currentTarget.value;
+    setSearchInput(value);
+  }
 
   function handleFilterChange(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
@@ -41,8 +57,16 @@ export default function Inventory() {
     }
   }
   useEffect(() => {
-    console.log(filter);
-  }, [filter]);
+    setFilteredInventory(inventory);
+  }, [inventory]);
+  useEffect(() => {
+    if (searchInput === "") {
+      setFilteredInventory(inventory);
+    } else {
+      const searchedItems = searchInventory(searchInput);
+      setFilteredInventory(searchedItems);
+    }
+  });
 
   useEffect(() => {
     const fetchInventory = async () => {
@@ -60,7 +84,11 @@ export default function Inventory() {
     <div className="w-full content-area">
       <div className="flex justify-between content-padding bg-lightPrimary border-top-bottom">
         <h2 className="page-title">Inventory</h2>
-        <input type="text" placeholder="Search.." />
+        <input
+          type="text"
+          placeholder="Search.."
+          onChange={handleSearchInput}
+        />
       </div>
 
       <div className="content-padding">
@@ -130,15 +158,15 @@ export default function Inventory() {
           </thead>
           <tbody>
             {filter === InventoryFilter.All &&
-              inventory.map((item) => (
+              filteredInventory.map((item) => (
                 <InventoryItem key={item.id} item={item} />
               ))}
             {filter === InventoryFilter.Available &&
-              inventory
+              filteredInventory
                 .filter((item) => item.quantity > 0)
                 .map((item) => <InventoryItem key={item.id} item={item} />)}
             {filter === InventoryFilter.Unavailable &&
-              inventory
+              filteredInventory
                 .filter((item) => !item.quantity)
                 .map((item) => <InventoryItem key={item.id} item={item} />)}
           </tbody>
