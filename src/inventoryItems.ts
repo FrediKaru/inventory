@@ -37,6 +37,7 @@ const transformData = (data: DocumentData): InventoryItemProps => {
     powerConsumption: Number(data.powerConsumption) || 0,
     weight: Number(data.weight),
     quantity: Number(data.quantity),
+    img: String(data.img),
   };
 };
 
@@ -177,6 +178,7 @@ export async function setSampleProducts() {
       name: "Luxibel B P16",
       manufacturer: "Luxibel",
       cost: 10500,
+      img: "https://tsstage.com/cdn/shop/products/Solawash_2000_prod_right_600x831.jpg?v=1624281809",
       type: "LED Wash",
       weight: 15.0, // in kilograms
       powerConsumption: 600, // in watts

@@ -15,6 +15,7 @@ export interface InventoryItemProps {
   weight: number;
   quantity?: number;
   lastModified?: number;
+  img?: string;
 }
 
 enum InventoryFilter {
