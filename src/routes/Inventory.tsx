@@ -19,9 +19,9 @@ export interface InventoryItemProps {
 }
 
 enum InventoryFilter {
-  All = "all",
-  Available = "available",
-  Unavailable = "unavailable",
+  All = "All",
+  Available = "Available",
+  Unavailable = "Unavailable",
 }
 
 export default function Inventory() {
@@ -29,10 +29,20 @@ export default function Inventory() {
   const [filter, setFilter] = useState<InventoryFilter>(InventoryFilter.All);
 
   function handleFilterChange(e: React.MouseEvent<HTMLButtonElement>) {
-    const newState = e.currentTarget.value as keyof typeof InventoryFilter;
+    e.preventDefault();
 
-    setFilter(InventoryFilter[newState]);
+    const value = e.currentTarget.value;
+
+    if (value in InventoryFilter) {
+      const newState = value as keyof typeof InventoryFilter;
+      setFilter(InventoryFilter[newState]);
+    } else {
+      console.log("Invalid filter value", value);
+    }
   }
+  useEffect(() => {
+    console.log(filter);
+  }, [filter]);
 
   useEffect(() => {
     const fetchInventory = async () => {
@@ -62,7 +72,7 @@ export default function Inventory() {
                 : "empty-btn bg-lightPrimary"
             }
             onClick={handleFilterChange}
-            value="all"
+            value={InventoryFilter.All}
           >
             All products
           </button>
@@ -73,7 +83,7 @@ export default function Inventory() {
                 : "empty-btn bg-lightPrimary"
             }
             onClick={handleFilterChange}
-            value="available"
+            value={InventoryFilter.Available}
           >
             Available
           </button>
@@ -84,7 +94,7 @@ export default function Inventory() {
                 : "empty-btn bg-lightPrimary"
             }
             onClick={handleFilterChange}
-            value="unavailable"
+            value={InventoryFilter.Unavailable}
           >
             Reserved
           </button>
