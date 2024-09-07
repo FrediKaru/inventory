@@ -7,6 +7,7 @@
 
 import { Outlet } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
+import Topbar from "./components/Topbar";
 
 function App() {
   return (
@@ -14,8 +15,13 @@ function App() {
       {/* <div>
         <input type="text" placeholder="Search.."></input>
       </div> */}
+      <div className="">
+        <Topbar />
+      </div>
       <div className="flex">
-        <Sidebar />
+        <div className="hidden lg:block">
+          <Sidebar />
+        </div>
         <Outlet />
       </div>
     </>
