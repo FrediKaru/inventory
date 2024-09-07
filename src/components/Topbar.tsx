@@ -1,12 +1,24 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 export default function Topbar() {
+  const [burgerOpen, setBurgerOpen] = useState(false);
+
+  function toggleBurgerMenu() {
+    setBurgerOpen(!burgerOpen);
+  }
+
   return (
     <div className="topbar content-padding bg-primary">
       <div className="flex justify-between border23">
         <h2 className="">Lighttrack</h2>
         <div className="lg:hidden">
-          <input type="checkbox" id="nav-toggle" className="nav-toggle" />
+          <input
+            type="checkbox"
+            id="nav-toggle"
+            className="nav-toggle"
+            checked={burgerOpen}
+          />
           <nav className="nav-mobile">
             <ul
               className="flex
@@ -15,6 +27,7 @@ export default function Topbar() {
               <li>
                 <NavLink
                   to="/dashboard"
+                  onClick={toggleBurgerMenu}
                   className={({ isActive }) =>
                     isActive ? "active-button topbar-button" : "topbar-button"
                   }
@@ -25,6 +38,7 @@ export default function Topbar() {
               <li>
                 <NavLink
                   to="/inventory"
+                  onClick={toggleBurgerMenu}
                   className={({ isActive }) =>
                     isActive ? "active-button topbar-button" : "topbar-button"
                   }
@@ -35,6 +49,7 @@ export default function Topbar() {
               <li>
                 <NavLink
                   to="/reservations"
+                  onClick={toggleBurgerMenu}
                   className={({ isActive }) =>
                     isActive ? "active-button topbar-button" : "topbar-button"
                   }
@@ -45,6 +60,7 @@ export default function Topbar() {
               <li>
                 <NavLink
                   to="/preferences"
+                  onClick={toggleBurgerMenu}
                   className={({ isActive }) =>
                     isActive ? "active-button topbar-button" : "topbar-button"
                   }
@@ -55,7 +71,11 @@ export default function Topbar() {
               </li>
             </ul>
           </nav>
-          <label htmlFor="nav-toggle" className="nav-toggle-label">
+          <label
+            htmlFor="nav-toggle"
+            className="nav-toggle-label"
+            onClick={toggleBurgerMenu}
+          >
             <span></span>
           </label>
         </div>
