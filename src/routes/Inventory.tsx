@@ -28,7 +28,7 @@ export default function Inventory() {
   const [inventory, setInventory] = useState<InventoryItemProps[]>([]);
   const [filter, setFilter] = useState<InventoryFilter>(InventoryFilter.All);
   const [filteredInventory, setFilteredInventory] = useState(inventory);
-  const [searchInput, setSearchInput] = useState<String>("this");
+  const [searchInput, setSearchInput] = useState<String>("");
 
   function searchInventory(searchInput: string) {
     return inventory.filter((item) =>
@@ -57,8 +57,17 @@ export default function Inventory() {
     }
   }
   useEffect(() => {
-    setFilteredInventory(inventory);
-  }, [inventory]);
+    const fetchInventory = async () => {
+      try {
+        const inventoryItems = await getProducts();
+        setInventory(inventoryItems);
+        setFilteredInventory(inventoryItems);
+      } catch (e) {
+        console.log("Fetching products is not possible!");
+      }
+    };
+    fetchInventory();
+  }, []);
 
   useEffect(() => {
     if (searchInput === "") {
@@ -68,18 +77,6 @@ export default function Inventory() {
       setFilteredInventory(searchedItems);
     }
   }, [searchInput, inventory]);
-
-  useEffect(() => {
-    const fetchInventory = async () => {
-      try {
-        const inventoryItems = await getProducts();
-        setInventory(inventoryItems);
-      } catch (e) {
-        console.log("Fetching products is not possible!");
-      }
-    };
-    fetchInventory();
-  }, []);
 
   return (
     <div className="w-full content-area">
