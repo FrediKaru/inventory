@@ -9,7 +9,6 @@ export default function Sidebar() {
   return (
     <div className="sidebar content-padding bg-primary">
       <div>
-        <h2 className="mb-10">Lighttrack</h2>
         <ul
           className="flex
          flex-col gap-3"
