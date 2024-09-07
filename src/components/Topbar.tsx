@@ -1,12 +1,5 @@
 import { NavLink } from "react-router-dom";
 
-import { MdDashboard } from "react-icons/md";
-import { GiHamburgerMenu } from "react-icons/gi";
-
-import { MdInventory } from "react-icons/md";
-import { FaBook } from "react-icons/fa";
-import { IoSettingsSharp } from "react-icons/io5";
-
 export default function Topbar() {
   return (
     <div className="topbar content-padding bg-primary">

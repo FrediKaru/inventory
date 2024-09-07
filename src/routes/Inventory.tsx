@@ -28,7 +28,7 @@ export default function Inventory() {
   const [inventory, setInventory] = useState<InventoryItemProps[]>([]);
   const [filter, setFilter] = useState<InventoryFilter>(InventoryFilter.All);
   const [filteredInventory, setFilteredInventory] = useState(inventory);
-  const [searchInput, setSearchInput] = useState<String>("");
+  const [searchInput, setSearchInput] = useState<string>("");
 
   function searchInventory(searchInput: string) {
     return inventory.filter((item) =>
@@ -161,7 +161,7 @@ export default function Inventory() {
               ))}
             {filter === InventoryFilter.Available &&
               filteredInventory
-                .filter((item) => item.quantity > 0)
+                .filter((item) => (item.quantity ?? 0) > 0)
                 .map((item) => <InventoryItem key={item.id} item={item} />)}
             {filter === InventoryFilter.Unavailable &&
               filteredInventory
