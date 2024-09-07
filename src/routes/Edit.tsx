@@ -66,7 +66,7 @@ export default function Edit() {
               onSubmit={handleSave}
             >
               <div className="grid lg:grid-cols-2 gap-4 mr-auto">
-                <div className="edit-field border">
+                {/* <div className="edit-field border">
                   <label>Img</label>
                   <input
                     type="text"
@@ -74,8 +74,8 @@ export default function Edit() {
                     value={formData.img}
                     onChange={handleFieldChange}
                   />
-                </div>
-                <div className="edit-field border">
+                </div> */}
+                <div className="edit-field">
                   <label>Name</label>
                   <input
                     type="text"
@@ -132,7 +132,7 @@ export default function Edit() {
               </div>
               {/* <label>Amount</label>
                     <input type="text" name="amount" value={formData.amount} /> */}
-              <div className="flex">
+              <div className="flex gap-2 mt-7">
                 <button type="submit" className="btn">
                   Save
                 </button>
