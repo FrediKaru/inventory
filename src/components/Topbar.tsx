@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
+import { FaRegUser } from "react-icons/fa";
+
 export default function Topbar() {
   const [burgerOpen, setBurgerOpen] = useState(false);
 
@@ -79,6 +81,10 @@ export default function Topbar() {
             <span></span>
           </label>
         </div>
+        <NavLink to="/dashboard" className="login-btn">
+          <FaRegUser className="mr-2" />
+          Log in
+        </NavLink>
       </div>
     </div>
   );

@@ -119,6 +119,10 @@ tr > * {
 input[type="checkbox"] {
   margin-left: 12px;
 }
+.login-btn {
+  display: flex;
+  align-items: center;
+}
 
 .sidebar-button {
   display: flex;
