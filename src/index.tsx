@@ -8,6 +8,8 @@ import Errorpage from "./error-page.tsx";
 import App from "./App.tsx";
 import Inventory from "./routes/Inventory.tsx";
 import Edit from "./routes/Edit.tsx";
+import Reservations from "./routes/Reservations.tsx";
+import Preferences from "./routes/Preferences.tsx";
 
 const router = createBrowserRouter([
   {
@@ -29,11 +31,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/reservations",
-        element: <Inventory />,
+        element: <Reservations />,
       },
       {
         path: "/preferences",
-        element: <Inventory />,
+        element: <Preferences />,
       },
       {
         path: "/edit/:id",
