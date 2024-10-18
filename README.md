@@ -10,6 +10,9 @@ The Lighting Inventory Management App is a simple tool I built to help small pro
 ## Demo
 Live Demo: https://inventory-txje.vercel.app/
 
+<img width="1559" alt="inventory_preview" src="https://github.com/user-attachments/assets/1f9face0-021f-4ab7-b264-b573ba39f7ec">
+
+
 ## Installation
 
 ```
