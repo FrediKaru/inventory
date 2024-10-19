@@ -2,13 +2,21 @@
 
 The Lighting Inventory Management App is a simple tool I built to help small production teams and freelancers keep track of their lighting gear and manage different bookings by users.
 
+### ⚙️ Features in Development
+Some features are still being actively developed:
+
+User management (registration and profile management)
+Login and authentication
+
+## Demo
+Live Demo: https://inventory-txje.vercel.app/
+
+
 ## Features
 - Firestore Database: Real-time data storage and syncing using Firestore
 - Search Function: Find products quickly by name or brand.
 - Edit Product Details: Update key attributes like quantity, weight, and more.
 
-## Demo
-Live Demo: https://inventory-txje.vercel.app/
 
 
 ## Installation
