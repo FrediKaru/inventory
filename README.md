@@ -17,6 +17,7 @@ Live Demo: https://inventory-txje.vercel.app/
 - Firestore Database: Real-time data storage and syncing using Firestore
 - Search Function: Find products quickly by name or brand.
 - Edit Product Details: Update key attributes like quantity, weight, and more.
+- Filter products by availability
 
 
 
