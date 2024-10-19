@@ -14,7 +14,7 @@ Live Demo: https://inventory-txje.vercel.app/
 ## Installation
 clone the repository
 ```
-git clone git@github.com:FrediKaru/task-manager-app.git
+git clone git@github.com:FrediKaru/inventory.git
 ```
 locate the repository
 ```
