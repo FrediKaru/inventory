@@ -6,7 +6,8 @@ The Lighting Inventory Management App is a simple tool I built to help small pro
 Some features are still being actively developed:
 
 User management (registration and profile management)
-Login and authentication
+- Login and authentication
+- Reservations page
 
 ## Demo
 Live Demo: https://inventory-txje.vercel.app/
