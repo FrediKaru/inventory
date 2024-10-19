@@ -10,6 +10,7 @@ Login and authentication
 
 ## Demo
 Live Demo: https://inventory-txje.vercel.app/
+<img width="1559" alt="inventory_preview" src="https://github.com/user-attachments/assets/0770681d-9b36-43cc-97b1-be0d6e6f993a">
 
 
 ## Features
