@@ -20,7 +20,8 @@ export default function Sidebar() {
                 isActive ? "active-button sidebar-button" : "sidebar-button"
               }
             >
-              <MdDashboard className="mr-2" /> Dashboard
+              <MdDashboard className="mr-2" />
+              Dashboard
             </NavLink>
           </li>
           <li>

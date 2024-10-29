@@ -10,6 +10,7 @@ import Inventory from "./routes/Inventory.tsx";
 import Edit from "./routes/Edit.tsx";
 import Reservations from "./routes/Reservations.tsx";
 import Preferences from "./routes/Preferences.tsx";
+import Dashboard from "./routes/Dashboard.tsx";
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Inventory />,
+        element: <Dashboard />,
       },
       {
         path: "/inventory",
