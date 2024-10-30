@@ -27,6 +27,7 @@ export default function EditBooking() {
     }
   }
 
+  // update formData when calendar dates change
   useEffect(() => {
     setFormData((prevData) => ({
       ...prevData,
@@ -37,6 +38,7 @@ export default function EditBooking() {
     }));
   }, [startingDate, endingDate]);
 
+  // get booking data when page loads
   useEffect(() => {
     const fetchData = async () => {
       try {
