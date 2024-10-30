@@ -51,14 +51,14 @@ const BookingsMonitor = ({ bookings }: BookingsMonitorProps) => (
     <h2>Recent bookings</h2>
     <div>
       <table className="bookings">
-        <thead>
+        <thead className="inventory-header">
           <td>Name</td>
           <td>Title</td>
           <td>Ending date</td>
         </thead>
         <tbody>
           {bookings.map((booking) => (
-            <tr key={booking.id}>
+            <tr key={booking.id} className="result">
               <td>{booking.name}</td>
               <td>{booking.title}</td>
               <td>4 january</td>
