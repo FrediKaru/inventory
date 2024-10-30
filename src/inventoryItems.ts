@@ -52,6 +52,8 @@ const transformBookingData = (data: DocumentData): BookingProps => {
     id: data.id,
     name: data.name || "",
     title: data.title || "",
+    startingDate: data.startingDate,
+    endingDate: data.endingDate,
   };
 };
 const transformData = (data: DocumentData): InventoryItemProps => {

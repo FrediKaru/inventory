@@ -2,9 +2,21 @@ import React, { useEffect, useState } from "react";
 import { Form, useNavigate, useParams } from "react-router-dom";
 import { saveBooking, getBooking } from "../inventoryItems";
 import { BookingProps } from "./Inventory";
+import "react-calendar/dist/Calendar.css";
+
+import Calendar from "react-calendar";
+
+type ValuePiece = Date | null;
+
+type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export default function EditBooking() {
-  const [formData, setFormData] = useState<BookingProps>({});
+  const [formData, setFormData] = useState<BookingProps>({
+    startingDate: undefined,
+    endingDate: undefined,
+  });
+  const [startingDate, setStarting] = useState<Value>(null);
+  const [endingDate, setEnding] = useState<Value>(null);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -16,6 +28,16 @@ export default function EditBooking() {
   }
 
   useEffect(() => {
+    setFormData((prevData) => ({
+      ...prevData,
+      startingDate:
+        startingDate instanceof Date ? startingDate.toISOString() : undefined,
+      endingDate:
+        endingDate instanceof Date ? endingDate.toISOString() : undefined,
+    }));
+  }, [startingDate, endingDate]);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         if (id) {
@@ -23,6 +45,16 @@ export default function EditBooking() {
           console.log("booking data recieved:", bookingData);
           if (bookingData) {
             setFormData(bookingData as BookingProps);
+            setStarting(
+              bookingData.startingDate
+                ? new Date(bookingData.startingDate)
+                : new Date("2033-10-5")
+            );
+            setEnding(
+              bookingData.endingDate
+                ? new Date(bookingData.endingDate)
+                : new Date("2033-10-18T21:00:00.000Z")
+            );
           }
         }
       } catch (e) {
@@ -72,6 +104,32 @@ export default function EditBooking() {
                   onChange={handleFieldChange}
                   value={formData.name}
                 />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  name="startingDate"
+                  value={
+                    startingDate
+                      ? new Date(startingDate).toISOString().split("T")[0]
+                      : ""
+                  }
+                  readOnly
+                ></input>
+                <Calendar onChange={setStarting} value={startingDate} />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  name="endingDate"
+                  value={
+                    endingDate
+                      ? new Date(endingDate).toISOString().split("T")[0]
+                      : ""
+                  }
+                  readOnly
+                ></input>
+                <Calendar onChange={setEnding} value={endingDate} />
               </div>
             </div>
             {/* <label>Amount</label>
