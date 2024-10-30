@@ -11,6 +11,7 @@ import Edit from "./routes/Edit.tsx";
 import Reservations from "./routes/Reservations.tsx";
 import Preferences from "./routes/Preferences.tsx";
 import Dashboard from "./routes/Dashboard.tsx";
+import NewBooking from "./routes/NewBooking.tsx";
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/edit/:id",
         element: <Edit />,
+      },
+      {
+        path: "/b",
+        element: <NewBooking />,
       },
     ],
   },
