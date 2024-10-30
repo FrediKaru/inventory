@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { getProductsCount, getBookings } from "../inventoryItems";
 import { BookingProps } from "./Inventory";
 
@@ -32,7 +33,7 @@ const OverviewCards = ({
 const QuickActions = () => (
   <section className=" dashboard-section">
     <div className="quick-actions flex gap-3">
-      <button>Create New Booking</button>
+      <NavLink to="/b">Create New Booking</NavLink>
       <button>Add New Item</button>
       <button>Check In/Out</button>
       <button>Generate Report</button>
