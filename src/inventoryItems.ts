@@ -94,9 +94,15 @@ export async function getProduct(id: number) {
 
 export async function saveBooking(formData: BookingProps) {
   const id = formData.id || uuidv4();
+
+  const newBooking = {
+    ...formData,
+    id,
+  };
+
   try {
     await setDoc(doc(bookingsRef, id.toString()), {
-      ...formData,
+      ...newBooking,
     });
   } catch (error) {
     console.log("Unable to save a new booking");
