@@ -50,14 +50,25 @@ const BookingsMonitor = ({ bookings }: BookingsMonitorProps) => (
   <section className="my-10 dashboard-section">
     <h2>Recent bookings</h2>
     <div>
-      <ul className="bookings">
-        {bookings.map((booking) => (
-          <li key={booking.id}>
-            {booking.id}
-            {booking.name}
-          </li>
-        ))}
-      </ul>
+      <table className="bookings">
+        <thead>
+          <td>Name</td>
+          <td>Title</td>
+          <td>Ending date</td>
+        </thead>
+        <tbody>
+          {bookings.map((booking) => (
+            <tr key={booking.id}>
+              <td>{booking.name}</td>
+              <td>{booking.title}</td>
+              <td>4 january</td>
+              <td>
+                <NavLink to={`/b/${booking.id}`}>Edit</NavLink>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   </section>
 );

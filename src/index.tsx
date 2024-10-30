@@ -12,6 +12,7 @@ import Reservations from "./routes/Reservations.tsx";
 import Preferences from "./routes/Preferences.tsx";
 import Dashboard from "./routes/Dashboard.tsx";
 import NewBooking from "./routes/NewBooking.tsx";
+import EditBooking from "./routes/EditBooking.tsx";
 
 const router = createBrowserRouter([
   {
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/b",
         element: <NewBooking />,
+      },
+      {
+        path: "/b/:id",
+        element: <EditBooking />,
       },
     ],
   },

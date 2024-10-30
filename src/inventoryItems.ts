@@ -80,17 +80,17 @@ export async function getProduct(id: number) {
     return null;
   }
 }
-// const transformForFirestore = (data: InventoryItemProps): DocumentData => {
-//   return {
-//     id: data.id,
-//     name: data.name,
-//     cost: data.cost,
-//     type: data.type,
-//     powerConsumption: data.powerConsumption,
-//     weight: data.weight,
-//     quantity: data.quantity,
-//   };
-// };
+export async function getBooking(id: string) {
+  const docRef = doc(db, "bookings", id);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    const data = docSnap.data();
+    return transformBookingData(data);
+  } else {
+    console.log("No such booking");
+  }
+}
 
 export async function saveBooking(formData: BookingProps) {
   const id = formData.id || uuidv4();
@@ -108,6 +108,18 @@ export async function saveBooking(formData: BookingProps) {
     console.log("Unable to save a new booking");
   }
 }
+
+// const transformForFirestore = (data: InventoryItemProps): DocumentData => {
+//   return {
+//     id: data.id,
+//     name: data.name,
+//     cost: data.cost,
+//     type: data.type,
+//     powerConsumption: data.powerConsumption,
+//     weight: data.weight,
+//     quantity: data.quantity,
+//   };
+// };
 
 export async function saveProduct(id: number, formData: InventoryItemProps) {
   try {
