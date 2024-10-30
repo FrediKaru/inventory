@@ -1,5 +1,3 @@
-import React from "react";
-
 function Reservations() {
   return (
     <div className="w-full content-area">

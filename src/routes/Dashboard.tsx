@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { getProductsCount, getBookings } from "../inventoryItems";
 import { BookingProps } from "./Inventory";
@@ -72,7 +72,6 @@ const Statistics = () => (
 // Main Dashboard Component
 function Dashboard() {
   const [totalProducts, setTotalProducts] = useState(0);
-  const [totalBookings, setTotalBookings] = useState(99);
   const [bookings, setBookings] = useState<BookingProps[]>([]);
 
   // get bookings and total number of products

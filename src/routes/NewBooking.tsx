@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Form, useNavigate, useParams } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import { saveBooking } from "../inventoryItems";
 import { BookingProps } from "./Inventory";
 
