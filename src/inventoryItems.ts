@@ -3,6 +3,8 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { firebaseConfig } from "./firebaseConfig";
 
+import { v4 as uuidv4 } from "uuid";
+
 import {
   getDocs,
   setDoc,
@@ -12,12 +14,13 @@ import {
   getFirestore,
   DocumentData,
 } from "firebase/firestore";
-import { InventoryItemProps } from "./routes/Inventory";
+import { BookingProps, InventoryItemProps } from "./routes/Inventory";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const productsRef = collection(db, "products");
+const bookingsRef = collection(db, "bookings");
 
 export async function getProducts() {
   const querySnapshot = await getDocs(collection(db, "products"));
@@ -27,6 +30,30 @@ export async function getProducts() {
   });
   return products;
 }
+
+export async function getBookings() {
+  const querySnapshot = await getDocs(collection(db, "bookings"));
+  const bookings: BookingProps[] = [];
+  querySnapshot.forEach((doc) => {
+    bookings.push(transformBookingData(doc.data()));
+  });
+  return bookings;
+}
+export async function getProductsCount() {
+  const querySnapshot = await getDocs(collection(db, "products"));
+  const products: InventoryItemProps[] = [];
+  querySnapshot.forEach((doc) => {
+    products.push(transformData(doc.data()));
+  });
+  return products.length;
+}
+const transformBookingData = (data: DocumentData): BookingProps => {
+  return {
+    id: data.id,
+    name: data.name || "",
+    title: data.title || "",
+  };
+};
 const transformData = (data: DocumentData): InventoryItemProps => {
   return {
     id: Number(data.id),
@@ -64,6 +91,17 @@ export async function getProduct(id: number) {
 //     quantity: data.quantity,
 //   };
 // };
+
+export async function saveBooking(formData: BookingProps) {
+  const id = formData.id || uuidv4();
+  try {
+    await setDoc(doc(bookingsRef, id.toString()), {
+      ...formData,
+    });
+  } catch (error) {
+    console.log("Unable to save a new booking");
+  }
+}
 
 export async function saveProduct(id: number, formData: InventoryItemProps) {
   try {
