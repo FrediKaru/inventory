@@ -5,6 +5,7 @@ import { BookingProps } from "./Inventory";
 import "react-calendar/dist/Calendar.css";
 
 import Calendar from "react-calendar";
+import BookedProducts from "../components/BookedProducts";
 
 type ValuePiece = Date | null;
 
@@ -14,6 +15,7 @@ export default function EditBooking() {
   const [formData, setFormData] = useState<BookingProps>({
     startingDate: undefined,
     endingDate: undefined,
+    savedItems: [],
   });
   const [startingDate, setStarting] = useState<Value>(null);
   const [endingDate, setEnding] = useState<Value>(null);
@@ -112,7 +114,7 @@ export default function EditBooking() {
                   type="text"
                   name="startingDate"
                   value={
-                    startingDate
+                    startingDate instanceof Date
                       ? new Date(startingDate).toISOString().split("T")[0]
                       : ""
                   }
@@ -125,7 +127,7 @@ export default function EditBooking() {
                   type="text"
                   name="endingDate"
                   value={
-                    endingDate
+                    endingDate instanceof Date
                       ? new Date(endingDate).toISOString().split("T")[0]
                       : ""
                   }
@@ -150,6 +152,7 @@ export default function EditBooking() {
             </div>
           </Form>
         </div>
+        <BookedProducts setFormData={setFormData} formData={formData} />
       </div>
     </div>
   );

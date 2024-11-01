@@ -23,6 +23,7 @@ export interface BookingProps {
   title?: string;
   startingDate?: Date | string;
   endingDate?: Date | string;
+  savedItems: number[];
 }
 
 enum InventoryFilter {
