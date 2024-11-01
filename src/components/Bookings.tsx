@@ -26,7 +26,7 @@ const Bookings = ({ bookings }: BookingsProps) => (
             <tr key={booking.id} className="result">
               <td>{booking.name}</td>
               <td>{booking.title}</td>
-              <td>12</td>
+              <td>{booking.savedItems.length}</td>
               <td>
                 {booking.startingDate
                   ? new Date(booking.startingDate).toLocaleDateString()
