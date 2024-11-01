@@ -4,7 +4,11 @@ import { saveBooking } from "../inventoryItems";
 import { BookingProps } from "./Inventory";
 
 export default function NewBooking() {
-  const [formData, setFormData] = useState<BookingProps>({});
+  const [formData, setFormData] = useState<BookingProps>({
+    startingDate: undefined,
+    endingDate: undefined,
+    savedItems: [],
+  });
   const navigate = useNavigate();
 
   async function handleSave() {
