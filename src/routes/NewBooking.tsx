@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Form, useNavigate } from "react-router-dom";
 import { saveBooking } from "../inventoryItems";
-import { BookingProps } from "./Inventory";
+import { BookingProps } from "../components/Bookings";
+import { v4 as uuidv4 } from "uuid";
 
 export default function NewBooking() {
   const [formData, setFormData] = useState<BookingProps>({
-    startingDate: undefined,
-    endingDate: undefined,
+    endingDate: "2024-10-10",
+    startingDate: "2024-10-10",
+    name: "",
+    id: uuidv4(),
     savedItems: [],
+    title: "",
   });
   const navigate = useNavigate();
 

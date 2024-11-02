@@ -1,12 +1,20 @@
-import { BookingProps } from "../routes/Inventory";
-import { NavLink } from "react-router-dom";
-// Define props for BookingsMonitor
+import { Link } from "react-router-dom";
+
+export interface BookingProps {
+  id: string;
+  name?: string;
+  title?: string;
+  startingDate?: Date | string;
+  endingDate?: Date | string;
+  savedItems: number[];
+}
 
 type BookingsProps = {
   bookings: BookingProps[];
+  handleDelete: (id: string) => void;
 };
 
-const Bookings = ({ bookings }: BookingsProps) => (
+const Bookings = ({ bookings, handleDelete }: BookingsProps) => (
   <section className="my-10 dashboard-section">
     <h2>Recent bookings</h2>
     <div>
@@ -37,13 +45,16 @@ const Bookings = ({ bookings }: BookingsProps) => (
                   ? new Date(booking.endingDate).toLocaleDateString()
                   : ""}
               </td>
-              <td className="text-lightPrimary">
-                <NavLink
-                  to={`/b/${booking.id}`}
-                  className={"px-6 py-2 rounded-sm bg-primary"}
-                >
+              <td className="flex btn-group gap-2">
+                <Link to={`/b/${booking.id}`} className="btn">
                   Edit
-                </NavLink>
+                </Link>
+                <button
+                  className="btn"
+                  onClick={() => handleDelete(booking.id)}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}
