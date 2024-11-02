@@ -17,14 +17,6 @@ export interface InventoryItemProps {
   lastModified?: number;
   img?: string;
 }
-export interface BookingProps {
-  id?: string;
-  name?: string;
-  title?: string;
-  startingDate?: Date | string;
-  endingDate?: Date | string;
-  savedItems: number[];
-}
 
 enum InventoryFilter {
   All = "All",
