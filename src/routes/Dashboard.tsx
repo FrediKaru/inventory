@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { BookingProps } from "./Inventory";
-import { getProductsCount, getBookings } from "../inventoryItems";
+import { BookingProps } from "../components/Bookings";
+import {
+  getProductsCount,
+  getBookings,
+  deleteBooking,
+} from "../inventoryItems";
 
 import Bookings from "../components/Bookings";
 
@@ -55,6 +59,13 @@ function Dashboard() {
   const [totalProducts, setTotalProducts] = useState(0);
   const [bookings, setBookings] = useState<BookingProps[]>([]);
 
+  async function handleDelete(id: string) {
+    const newState = bookings.filter((booking) => booking.id !== id);
+    setBookings(newState);
+    console.log("handle delete");
+    deleteBooking(id);
+  }
+
   // get bookings and total number of products
   useEffect(() => {
     const fetchData = async () => {
@@ -85,7 +96,7 @@ function Dashboard() {
           totalBookings={bookings.length || 99}
         />
         <QuickActions />
-        <Bookings bookings={bookings} />
+        <Bookings bookings={bookings} handleDelete={handleDelete} />
         <Statistics />
       </main>
     </div>
