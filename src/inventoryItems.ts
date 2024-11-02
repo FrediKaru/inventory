@@ -14,7 +14,8 @@ import {
   getFirestore,
   DocumentData,
 } from "firebase/firestore";
-import { BookingProps, InventoryItemProps } from "./routes/Inventory";
+import { InventoryItemProps } from "./routes/Inventory";
+import { BookingProps } from "./components/Bookings";
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -99,8 +100,12 @@ export async function saveBooking(formData: BookingProps) {
   const id = formData.id || uuidv4();
 
   const newBooking = {
-    ...formData,
+    endingDate: formData.endingDate || "2024-10-10",
+    startingDate: formData.endingDate || "2024-10-10",
     id,
+    name: formData.name,
+    savedItems: formData.savedItems || [],
+    title: formData.title,
   };
 
   try {
@@ -110,6 +115,10 @@ export async function saveBooking(formData: BookingProps) {
   } catch (error) {
     console.log("Unable to save a new booking");
   }
+}
+
+export async function deleteBooking(id: string) {
+  console.log("Trying to delete booking with id:", id);
 }
 
 // const transformForFirestore = (data: InventoryItemProps): DocumentData => {
