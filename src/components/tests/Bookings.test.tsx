@@ -1,5 +1,6 @@
 import * as React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Bookings from "../Bookings";
 import { expect } from "chai";
 import { vi } from "vitest";
@@ -15,16 +16,32 @@ const bookings = [
     title: "Eras tour",
   },
 ];
+const handleDelete = vi.fn();
 
 describe("Bookings", () => {
   test("Renders bookings title", () => {
-    const handleDelete = vi.fn();
     render(
       <MemoryRouter>
         <Bookings bookings={bookings} handleDelete={handleDelete} />
       </MemoryRouter>
     );
-    screen.debug();
     expect(screen.getByText(/Eras tour/)).toBeInTheDocument();
+  });
+  test("Renders booking name", () => {
+    render(
+      <MemoryRouter>
+        <Bookings bookings={bookings} handleDelete={handleDelete} />
+      </MemoryRouter>
+    );
+    expect(screen.getByText(/Thomas/)).toBeInTheDocument();
+  });
+  test("Delete booking", async () => {
+    render(
+      <MemoryRouter>
+        <Bookings bookings={bookings} handleDelete={handleDelete} />
+      </MemoryRouter>
+    );
+    await userEvent.click(screen.getByText("Delete"));
+    expect(handleDelete).toHaveBeenCalledTimes(1);
   });
 });
