@@ -41,6 +41,8 @@ describe("Bookings", () => {
         <Bookings bookings={bookings} handleDelete={handleDelete} />
       </MemoryRouter>
     );
+    expect(screen.getByText(/Eras tour/)).toBeInTheDocument();
+    expect(handleDelete).toHaveBeenCalledTimes(0);
     await userEvent.click(screen.getByText("Delete"));
     expect(handleDelete).toHaveBeenCalledTimes(1);
   });
