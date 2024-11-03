@@ -7,7 +7,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: "jsdom",
-    setupFiles: "./tests/setup.js",
+    setupFiles: "./src/components/tests/setup.js",
   },
   build: {
     target: "esnext", // or 'es2022' to support top-level await
