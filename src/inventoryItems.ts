@@ -23,13 +23,32 @@ const db = getFirestore(app);
 const productsRef = collection(db, "products");
 const bookingsRef = collection(db, "bookings");
 
-export async function getProducts() {
+export enum InventoryFilter {
+  All = "All",
+  Available = "Available",
+  Unavailable = "Unavailable",
+}
+
+export async function getProducts(
+  filterType: InventoryFilter = InventoryFilter.All
+) {
   const querySnapshot = await getDocs(collection(db, "products"));
   const products: InventoryItemProps[] = [];
   querySnapshot.forEach((doc) => {
     products.push(transformData(doc.data()));
   });
-  return products;
+  if (filterType === InventoryFilter.Available) {
+    const availableProducts = products.filter(
+      (item) => (item.quantity ?? 0) > 0
+    );
+    return availableProducts;
+  }
+  if (filterType === InventoryFilter.Unavailable) {
+    const unavailableProducts = products.filter((item) => !item.quantity);
+    return unavailableProducts;
+  } else {
+    return products;
+  }
 }
 
 export async function getBookings() {

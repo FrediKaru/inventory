@@ -1,29 +1,31 @@
-// interface InventoryItemProps {
-//   id: number;
-//   name: string;
-//   status: string;
-//   lastModified?: number;
-// }
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 
 import { Outlet } from "react-router-dom";
 import Sidebar from "./components/Sidebar";
 import Topbar from "./components/Topbar";
 
+const queryClient = new QueryClient();
+
 function App() {
   return (
     <>
-      {/* <div>
-        <input type="text" placeholder="Search.."></input>
-      </div> */}
-      <div className="">
-        <Topbar />
-      </div>
-      <div className="flex">
-        <div className="hidden lg:block">
-          <Sidebar />
+      <QueryClientProvider client={queryClient}>
+        <div className="">
+          <Topbar />
         </div>
-        <Outlet />
-      </div>
+        <div className="flex">
+          <div className="hidden lg:block">
+            <Sidebar />
+          </div>
+          <Outlet />
+        </div>
+      </QueryClientProvider>
     </>
   );
 }

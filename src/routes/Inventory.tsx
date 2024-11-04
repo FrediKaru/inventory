@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getProducts } from "../inventoryItems";
+import { InventoryFilter, getProducts } from "../inventoryItems";
 
 import { FaUser } from "react-icons/fa";
 import { MdCategory } from "react-icons/md";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 export interface InventoryItemProps {
   id: number;
@@ -18,17 +19,17 @@ export interface InventoryItemProps {
   img?: string;
 }
 
-enum InventoryFilter {
-  All = "All",
-  Available = "Available",
-  Unavailable = "Unavailable",
-}
-
 export default function Inventory() {
   const [inventory, setInventory] = useState<InventoryItemProps[]>([]);
   const [filter, setFilter] = useState<InventoryFilter>(InventoryFilter.All);
   const [filteredInventory, setFilteredInventory] = useState(inventory);
   const [searchInput, setSearchInput] = useState<string>("");
+  const queryClient = useQueryClient();
+
+  const query = useQuery({
+    queryKey: ["products", filter],
+    queryFn: () => getProducts(filter),
+  });
 
   function searchInventory(searchInput: string) {
     return inventory.filter((item) =>
@@ -56,19 +57,6 @@ export default function Inventory() {
       console.log("Invalid filter value", value);
     }
   }
-  useEffect(() => {
-    const fetchInventory = async () => {
-      try {
-        const inventoryItems = await getProducts();
-        setInventory(inventoryItems);
-        setFilteredInventory(inventoryItems);
-      } catch (e) {
-        console.log("Fetching products is not possible!");
-      }
-    };
-    fetchInventory();
-  }, []);
-
   useEffect(() => {
     if (searchInput === "") {
       setFilteredInventory(inventory); // Reset to full inventory when search is empty
@@ -155,18 +143,9 @@ export default function Inventory() {
             </tr>
           </thead>
           <tbody>
-            {filter === InventoryFilter.All &&
-              filteredInventory.map((item) => (
-                <InventoryItem key={item.id} item={item} />
-              ))}
-            {filter === InventoryFilter.Available &&
-              filteredInventory
-                .filter((item) => (item.quantity ?? 0) > 0)
-                .map((item) => <InventoryItem key={item.id} item={item} />)}
-            {filter === InventoryFilter.Unavailable &&
-              filteredInventory
-                .filter((item) => !item.quantity)
-                .map((item) => <InventoryItem key={item.id} item={item} />)}
+            {query.data?.map((item) => (
+              <InventoryItem key={item.id} item={item} />
+            ))}
           </tbody>
         </table>
       </div>
