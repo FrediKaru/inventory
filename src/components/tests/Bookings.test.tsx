@@ -1,8 +1,8 @@
-import * as React from "react";
-import { render, screen, waitFor } from "@testing-library/react";
+import "@testing-library/jest-dom";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Bookings from "../Bookings";
-import { expect } from "chai";
+import { expect } from "vitest";
 import { vi } from "vitest";
 import { MemoryRouter } from "react-router";
 
