@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
-import { BookingProps, InventoryItemProps } from "../routes/Inventory"; // Keep this if used for typing inventory
+import { InventoryItemProps } from "../routes/Inventory"; // Keep this if used for typing inventory
+import { BookingProps } from "./Bookings";
 import { getProducts } from "../inventoryItems";
 
 interface BookedProductsProps {
@@ -21,7 +22,7 @@ const BookedProducts: FC<BookedProductsProps> = ({ setFormData, formData }) => {
       } catch (e) {
         console.log("Fetching products is not possible!", e);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     };
     fetchInventory();

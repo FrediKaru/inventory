@@ -1,6 +1,8 @@
 {
   "files": [],
-  "compilerOptions": { "types": ["@testing-library/jest-dom"] },
+  "compilerOptions": {
+    "types": ["vite", "vitest", "@testing-library/jest-dom", "node"]
+  },
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
