@@ -20,9 +20,7 @@ export interface InventoryItemProps {
 }
 
 export default function Inventory() {
-  const [inventory, setInventory] = useState<InventoryItemProps[]>([]);
   const [filter, setFilter] = useState<InventoryFilter>(InventoryFilter.All);
-  const [filteredInventory, setFilteredInventory] = useState(inventory);
   const [searchInput, setSearchInput] = useState<string>("");
   const queryClient = useQueryClient();
 
@@ -31,19 +29,13 @@ export default function Inventory() {
     queryFn: () => getProducts(filter),
   });
 
-  function searchInventory(searchInput: string) {
-    return inventory.filter((item) =>
-      Object.values(item).some((value) =>
-        value.toString().toLowerCase().includes(searchInput.toLowerCase())
+  const filteredInventory = searchInput
+    ? query.data?.filter((item) =>
+        Object.values(item).some((value) =>
+          value.toString().toLowerCase().includes(searchInput.toLowerCase())
+        )
       )
-    );
-  }
-
-  function handleSearchInput(e: React.ChangeEvent<HTMLInputElement>) {
-    e.preventDefault();
-    const value = e.currentTarget.value;
-    setSearchInput(value);
-  }
+    : query.data;
 
   function handleFilterChange(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
@@ -57,14 +49,6 @@ export default function Inventory() {
       console.log("Invalid filter value", value);
     }
   }
-  useEffect(() => {
-    if (searchInput === "") {
-      setFilteredInventory(inventory); // Reset to full inventory when search is empty
-    } else {
-      const searchedItems = searchInventory(searchInput);
-      setFilteredInventory(searchedItems);
-    }
-  }, [searchInput, inventory]);
 
   return (
     <div className="w-full content-area">
@@ -73,7 +57,7 @@ export default function Inventory() {
         <input
           type="text"
           placeholder="Search.."
-          onChange={handleSearchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
         />
       </div>
 
@@ -143,7 +127,7 @@ export default function Inventory() {
             </tr>
           </thead>
           <tbody>
-            {query.data?.map((item) => (
+            {filteredInventory.map((item) => (
               <InventoryItem key={item.id} item={item} />
             ))}
           </tbody>
