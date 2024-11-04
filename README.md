@@ -39,7 +39,10 @@ run in development mode
 ```
 npm run dev
 ```
-
+## Running tests
+```
+npm run test
+```
 ## Technologies Used
 - React (via Vite): Fast and lightweight development environment for building the app’s frontend with modern React features.
 - Firestore Database: Cloud-based NoSQL database for real-time data storage and syncing across users and devices.
