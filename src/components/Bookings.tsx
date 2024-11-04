@@ -9,7 +9,7 @@ export interface BookingProps {
   savedItems: number[];
 }
 
-type BookingsProps = {
+export type BookingsProps = {
   bookings: BookingProps[];
   handleDelete: (id: string) => void;
 };

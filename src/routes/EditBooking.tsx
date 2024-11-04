@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Form, useNavigate, useParams } from "react-router-dom";
 import { saveBooking, getBooking } from "../inventoryItems";
-import { BookingProps } from "./Inventory";
+import { BookingProps } from "../components/Bookings";
 import "react-calendar/dist/Calendar.css";
 
 import Calendar from "react-calendar";
@@ -13,6 +13,7 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 export default function EditBooking() {
   const [formData, setFormData] = useState<BookingProps>({
+    id: "",
     startingDate: undefined,
     endingDate: undefined,
     savedItems: [],
