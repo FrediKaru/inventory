@@ -127,9 +127,10 @@ export default function Inventory() {
             </tr>
           </thead>
           <tbody>
-            {filteredInventory.map((item) => (
-              <InventoryItem key={item.id} item={item} />
-            ))}
+            {filteredInventory &&
+              filteredInventory.map((item) => (
+                <InventoryItem key={item.id} item={item} />
+              ))}
           </tbody>
         </table>
       </div>
