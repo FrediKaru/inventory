@@ -59,25 +59,7 @@ const Statistics = () => (
 
 // Main Dashboard Component
 function Dashboard() {
-  // const [totalProducts, setTotalProducts] = useState(0);
   const [bookings, setBookings] = useState<BookingProps[]>([]);
-
-  // get bookings and total number of products
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const productsCount = await getProductsCount();
-  //       setTotalProducts(productsCount);
-
-  //       const fetchedBookings = await getBookings();
-  //       setBookings(fetchedBookings);
-  //       console.log(bookings);
-  //     } catch (e) {
-  //       console.log("Fetching product count is not possible!");
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
 
   async function handleDelete(id: string) {
     const newState = bookings.filter((booking) => booking.id !== id);
@@ -86,7 +68,6 @@ function Dashboard() {
     deleteBooking(id);
   }
 
-  useEffect(() => {});
   return (
     <div className="w-full">
       <div className="flex justify-between content-padding bg-lightPrimary border-top-bottom">
@@ -95,7 +76,7 @@ function Dashboard() {
       <main className="content-padding">
         <OverviewCards />
         <QuickActions />
-        <Bookings bookings={bookings} handleDelete={handleDelete} />
+        <Bookings handleDelete={handleDelete} />
         <Statistics />
       </main>
     </div>
