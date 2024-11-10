@@ -1,40 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { Form, useNavigate, useParams } from "react-router-dom";
-import { getProduct, saveProduct } from "../inventoryItems";
+import { fetchProductById, saveProduct } from "../inventoryItems";
 import Loading from "../components/Loading";
 import { InventoryItemProps } from "./Inventory";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export default function Edit() {
   const [formData, setFormData] = useState<InventoryItemProps | null>(null);
-  const [contentLoaded, setContentLoaded] = useState(false);
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  //import product data from ID included in URL
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        if (id) {
-          const productData = await getProduct(Number(id));
-          setFormData(productData);
-          setContentLoaded(true);
-          if (productData) {
-            console.log("data", productData);
-          }
-        }
-      } catch (e) {
-        console.log("The product was not found", e);
+  // mutation for saving product
+  const mutation = useMutation({
+    mutationFn: async () => {
+      if (formData && id) {
+        await saveProduct(Number(id), formData);
+        navigate("/");
       }
-    };
-    fetchProduct();
-  }, [id]);
+    },
+  });
 
-  async function handleSave() {
-    if (formData && id) {
-      await saveProduct(Number(id), formData);
-      navigate("/");
-    }
-  }
+  const { isLoading, data, error } = useQuery({
+    queryKey: ["product", id],
+    queryFn: () => fetchProductById(id),
+  });
+
+  // set form data when quere fetches data
+  useEffect(() => {
+    if (data) setFormData(data);
+  }, [data]);
 
   const handleFieldChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { name, value } = e.currentTarget;
@@ -49,7 +43,7 @@ export default function Edit() {
 
   return (
     <div className="min-h-screen bg-lightPrimary w-full ">
-      {contentLoaded && formData ? (
+      {!isLoading && formData ? (
         <div className="content-padding">
           <h2 className="text-2xl font-medium mb-8">Edit item</h2>
           <div className="md:flex gap-4">
@@ -63,7 +57,10 @@ export default function Edit() {
               method="post"
               action="/"
               className="edit-form flex flex-col"
-              onSubmit={handleSave}
+              onSubmit={(e) => {
+                e.preventDefault();
+                mutation.mutate();
+              }}
             >
               <div className="grid lg:grid-cols-2 gap-4 mr-auto">
                 {/* <div className="edit-field border">

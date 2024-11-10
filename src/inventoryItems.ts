@@ -91,7 +91,7 @@ const transformData = (data: DocumentData): InventoryItemProps => {
   };
 };
 
-export async function getProduct(id: number) {
+export async function fetchProductById(id: number) {
   const docRef = doc(db, "products", id.toString());
   const docSnap = await getDoc(docRef);
 
