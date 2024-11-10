@@ -8,33 +8,36 @@ import {
 } from "../inventoryItems";
 
 import Bookings from "../components/Bookings";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
-type OverviewCardsProps = {
-  totalItems: number;
-  activeProductions: number;
-  totalBookings: number;
-};
-
-const OverviewCards = ({
-  totalItems,
-  activeProductions,
-  totalBookings,
-}: OverviewCardsProps) => (
-  <section className="dashboard-section">
-    <h2>Overview</h2>
-    <div className="flex gap-3 cards py-6">
-      <div>
-        <p>Total Items</p> <h2 className="text-2xl">{totalItems}</h2>
+function OverviewCards() {
+  const totalItemsQuery = useQuery({
+    queryKey: ["totalItems"],
+    queryFn: getProductsCount,
+  });
+  const totalBookingsQuery = useQuery({
+    queryKey: ["totalBookings"],
+    queryFn: getBookings,
+  });
+  return (
+    <section className="dashboard-section">
+      <h2>Overview</h2>
+      <div className="flex gap-3 cards py-6">
+        <div>
+          <p>Total Items</p>{" "}
+          <h2 className="text-2xl">{totalItemsQuery.data}</h2>
+        </div>
+        <div>
+          <p>Active bookings</p> <h2 className="text-2xl">88</h2>
+        </div>
+        <div>
+          <p>Total bookings</p>{" "}
+          <h2 className="text-2xl">{totalBookingsQuery.data?.length || 999}</h2>
+        </div>
       </div>
-      <div>
-        <p>Active bookings</p> <h2 className="text-2xl">{activeProductions}</h2>
-      </div>
-      <div>
-        <p>Total bookings</p> <h2 className="text-2xl">{totalBookings}</h2>
-      </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+}
 
 const QuickActions = () => (
   <section className=" dashboard-section">
@@ -56,8 +59,25 @@ const Statistics = () => (
 
 // Main Dashboard Component
 function Dashboard() {
-  const [totalProducts, setTotalProducts] = useState(0);
+  // const [totalProducts, setTotalProducts] = useState(0);
   const [bookings, setBookings] = useState<BookingProps[]>([]);
+
+  // get bookings and total number of products
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const productsCount = await getProductsCount();
+  //       setTotalProducts(productsCount);
+
+  //       const fetchedBookings = await getBookings();
+  //       setBookings(fetchedBookings);
+  //       console.log(bookings);
+  //     } catch (e) {
+  //       console.log("Fetching product count is not possible!");
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   async function handleDelete(id: string) {
     const newState = bookings.filter((booking) => booking.id !== id);
@@ -66,23 +86,6 @@ function Dashboard() {
     deleteBooking(id);
   }
 
-  // get bookings and total number of products
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const productsCount = await getProductsCount();
-        setTotalProducts(productsCount);
-
-        const fetchedBookings = await getBookings();
-        setBookings(fetchedBookings);
-        console.log(bookings);
-      } catch (e) {
-        console.log("Fetching product count is not possible!");
-      }
-    };
-    fetchData();
-  }, []);
-
   useEffect(() => {});
   return (
     <div className="w-full">
@@ -90,11 +93,7 @@ function Dashboard() {
         <h2 className="page-title">Dashboard</h2>
       </div>
       <main className="content-padding">
-        <OverviewCards
-          totalItems={totalProducts}
-          activeProductions={12}
-          totalBookings={bookings.length || 99}
-        />
+        <OverviewCards />
         <QuickActions />
         <Bookings bookings={bookings} handleDelete={handleDelete} />
         <Statistics />
