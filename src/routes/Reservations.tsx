@@ -1,3 +1,5 @@
+import Bookings from "../components/Bookings";
+
 function Reservations() {
   return (
     <div className="w-full content-area">
@@ -5,7 +7,7 @@ function Reservations() {
         <h2 className="page-title">Reservations</h2>
       </div>
       <div className="content-padding">
-        <p>This section is coming soon.</p>
+        <Bookings />
       </div>
     </div>
   );
