@@ -54,7 +54,10 @@ const QuickActions = () => (
 const Statistics = () => (
   <section className="my-10 dashboard-section">
     <h2>Statistics</h2>
-    <div>Something here</div>
+
+    <div className="h-80">
+      <MyResponsiveLine />
+    </div>
   </section>
 );
 
@@ -77,11 +80,8 @@ function Dashboard() {
       <main className="content-padding">
         <OverviewCards />
         <QuickActions />
-        <Bookings handleDelete={handleDelete} />
-        <div className="h-80">
-          <MyResponsiveLine />
-        </div>
         <Statistics />
+        <Bookings handleDelete={handleDelete} />
       </main>
     </div>
   );
