@@ -7,7 +7,7 @@ import { IoSettingsSharp } from "react-icons/io5";
 
 export default function Sidebar() {
   return (
-    <div className="sidebar content-padding bg-primary">
+    <div className="sidebar content-padding bg-primary h-full">
       <div>
         <ul
           className="flex

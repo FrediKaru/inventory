@@ -22,7 +22,6 @@ export interface InventoryItemProps {
 export default function Inventory() {
   const [filter, setFilter] = useState<InventoryFilter>(InventoryFilter.All);
   const [searchInput, setSearchInput] = useState<string>("");
-  const queryClient = useQueryClient();
 
   const query = useQuery({
     queryKey: ["products", filter],

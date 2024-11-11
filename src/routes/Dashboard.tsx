@@ -9,6 +9,7 @@ import {
 
 import Bookings from "../components/Bookings";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import MyResponsiveLine from "../components/Line";
 
 function OverviewCards() {
   const totalItemsQuery = useQuery({
@@ -77,6 +78,9 @@ function Dashboard() {
         <OverviewCards />
         <QuickActions />
         <Bookings handleDelete={handleDelete} />
+        <div className="h-80">
+          <MyResponsiveLine />
+        </div>
         <Statistics />
       </main>
     </div>
