@@ -120,7 +120,7 @@ export async function saveBooking(formData: BookingProps) {
 
   const newBooking = {
     endingDate: formData.endingDate || "2024-10-10",
-    startingDate: formData.endingDate || "2024-10-10",
+    startingDate: formData.startingDate || "2024-10-10",
     id,
     name: formData.name,
     savedItems: formData.savedItems || [],

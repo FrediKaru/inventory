@@ -6,80 +6,72 @@ import "react-calendar/dist/Calendar.css";
 
 import Calendar from "react-calendar";
 import BookedProducts from "../components/BookedProducts";
+import { useQuery } from "@tanstack/react-query";
 
-type ValuePiece = Date | null;
+type BookingDate = Date | null;
 
-type Value = ValuePiece | [ValuePiece, ValuePiece];
+type DateRange = [BookingDate, BookingDate];
+type Params = { id: string };
 
 export default function EditBooking() {
+  const [datesrange, setDatesRange] = useState<DateRange>([null, null]);
   const [formData, setFormData] = useState<BookingProps>({
     id: "",
     startingDate: undefined,
     endingDate: undefined,
     savedItems: [],
   });
-  const [startingDate, setStarting] = useState<Value>(null);
-  const [endingDate, setEnding] = useState<Value>(null);
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id } = useParams<Params>();
 
-  async function handleSave() {
+  const bookingsQuery = useQuery({
+    queryKey: ["booking", id],
+    queryFn: () => getBooking(id),
+  });
+
+  useEffect(() => {
+    if (bookingsQuery.data) {
+      const booking = bookingsQuery.data as BookingProps;
+      setFormData(booking);
+
+      setDatesRange([
+        booking.startingDate ? new Date(booking.startingDate) : null,
+        booking.endingDate ? new Date(booking.endingDate) : null,
+      ]);
+    }
+  }, []);
+
+  //update formData when calendar dates change
+  useEffect(() => {
+    if (datesrange[0] && datesrange[1]) {
+      setFormData((prevData) => ({
+        ...prevData,
+        startingDate: datesrange[0].toISOString(),
+        endingDate: datesrange[1].toISOString(),
+      }));
+    }
+  }, [datesrange]);
+
+  const handleFieldChange = (e: React.FormEvent<HTMLInputElement>) => {
+    const { name, value } = e.currentTarget;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (datesrange[0] && datesrange[1] && datesrange[0] > datesrange[1]) {
+      alert("Starting date must be before ending date");
+      return;
+    }
+    console.log("Saving booking with data:", formData);
     if (formData) {
       await saveBooking(formData);
       navigate("/dashboard");
     }
-  }
-
-  // update formData when calendar dates change
-  useEffect(() => {
-    setFormData((prevData) => ({
-      ...prevData,
-      startingDate:
-        startingDate instanceof Date ? startingDate.toISOString() : undefined,
-      endingDate:
-        endingDate instanceof Date ? endingDate.toISOString() : undefined,
-    }));
-  }, [startingDate, endingDate]);
-
-  // get booking data when page loads
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        if (id) {
-          const bookingData = await getBooking(id);
-          console.log("booking data recieved:", bookingData);
-          if (bookingData) {
-            setFormData(bookingData as BookingProps);
-            setStarting(
-              bookingData.startingDate
-                ? new Date(bookingData.startingDate)
-                : new Date("2033-10-5")
-            );
-            setEnding(
-              bookingData.endingDate
-                ? new Date(bookingData.endingDate)
-                : new Date("2033-10-18T21:00:00.000Z")
-            );
-          }
-        }
-      } catch (e) {
-        console.log("Sorry, cant fetch booking!");
-      }
-    };
-    fetchData();
-  }, []);
-
-  const handleFieldChange = (e: React.FormEvent<HTMLInputElement>) => {
-    const { name, value } = e.currentTarget;
-    setFormData((prevData) => {
-      if (!prevData) return prevData;
-      return {
-        ...prevData,
-        [name]: value,
-      };
-    });
   };
-
   return (
     <div className="min-h-screen bg-lightPrimary w-full ">
       <div className="content-padding">
@@ -115,26 +107,29 @@ export default function EditBooking() {
                   type="text"
                   name="startingDate"
                   value={
-                    startingDate instanceof Date
-                      ? new Date(startingDate).toISOString().split("T")[0]
+                    datesrange[0] instanceof Date
+                      ? new Date(datesrange[0]).toISOString().split("T")[0]
                       : ""
                   }
                   readOnly
                 ></input>
-                <Calendar onChange={setStarting} value={startingDate} />
+                <Calendar
+                  onChange={(range) => setDatesRange(range as DateRange)}
+                  selectRange={true}
+                  value={datesrange}
+                />
               </div>
               <div>
                 <input
                   type="text"
                   name="endingDate"
                   value={
-                    endingDate instanceof Date
-                      ? new Date(endingDate).toISOString().split("T")[0]
+                    datesrange[1] instanceof Date
+                      ? new Date(datesrange[1]).toISOString().split("T")[0]
                       : ""
                   }
                   readOnly
                 ></input>
-                <Calendar onChange={setEnding} value={endingDate} />
               </div>
             </div>
             {/* <label>Amount</label>
