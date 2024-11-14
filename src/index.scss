@@ -82,8 +82,10 @@ body {
   background-color: rgb(153, 0, 0);
 }
 
-tr > * {
-  padding: 8px 0;
+tr {
+  * {
+    padding: 8px 0;
+  }
 }
 .inventory-header,
 .result {
@@ -103,17 +105,19 @@ tr > * {
   border-bottom: 1px solid var(--border-color);
 }
 
-.edit-field input {
-  font-size: 11pt;
-  padding: 4px;
-  border: 1px solid rgb(211, 211, 211);
-  border-radius: 3px;
-}
-.edit-field label {
-  display: block;
-  font-size: 11pt;
-  font-weight: 400;
-  margin-bottom: 0.3rem;
+.edit-field {
+  input {
+    font-size: 11pt;
+    padding: 4px;
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 3px;
+  }
+  label {
+    display: block;
+    font-size: 11pt;
+    font-weight: 400;
+    margin-bottom: 0.3rem;
+  }
 }
 
 input[type="checkbox"] {
@@ -160,8 +164,6 @@ input[type="checkbox"] {
 .nav-toggle {
   display: none;
 }
-.topbar {
-}
 
 .nav-toggle-label {
   position: absolute;
@@ -193,92 +195,21 @@ input[type="checkbox"] {
   top: 7px;
 }
 
-.roboto-thin {
-  font-family: "Roboto", sans-serif;
-  font-weight: 100;
-  font-style: normal;
-}
-
-.roboto-light {
-  font-family: "Roboto", sans-serif;
-  font-weight: 300;
-  font-style: normal;
-}
-
-.roboto-regular {
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.roboto-medium {
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  font-style: normal;
-}
-
-.roboto-bold {
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.roboto-black {
-  font-family: "Roboto", sans-serif;
-  font-weight: 900;
-  font-style: normal;
-}
-
-.roboto-thin-italic {
-  font-family: "Roboto", sans-serif;
-  font-weight: 100;
-  font-style: italic;
-}
-
-.roboto-light-italic {
-  font-family: "Roboto", sans-serif;
-  font-weight: 300;
-  font-style: italic;
-}
-
-.roboto-regular-italic {
-  font-family: "Roboto", sans-serif;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.roboto-medium-italic {
-  font-family: "Roboto", sans-serif;
-  font-weight: 500;
-  font-style: italic;
-}
-
-.roboto-bold-italic {
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
-  font-style: italic;
-}
-
-.roboto-black-italic {
-  font-family: "Roboto", sans-serif;
-  font-weight: 900;
-  font-style: italic;
-}
-
-.cards > div {
-  box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.1);
-  border-radius: 7pt;
-  padding: 20px 40px;
-}
-
-.cards > div > p {
-  color: rgb(155, 155, 155);
-  font-size: 10pt;
-  text-transform: uppercase;
-}
-.cards > div > h2 {
-  font-weight: 500;
-  font-size: 20pt;
+.cards {
+  div {
+    box-shadow: 0 4px 6px hsla(0, 0%, 0%, 0.1);
+    border-radius: 7pt;
+    padding: 20px 40px;
+    p {
+      color: rgb(155, 155, 155);
+      font-size: 10pt;
+      text-transform: uppercase;
+    }
+    h2 {
+      font-weight: 500;
+      font-size: 20pt;
+    }
+  }
 }
 
 .quick-actions > * {
